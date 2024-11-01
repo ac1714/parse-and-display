@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { parseText } from "@/lib/parseText";
-import ParsedDisplay from "./ParsedDisplay";
+import ParsedOutput from "./ParsedOutput";
+import SavedOutputs from "./SavedOutputs";
 import { toast } from "sonner";
 
 const TextParser = () => {
@@ -29,9 +30,12 @@ const TextParser = () => {
           value={input}
           onChange={handleInputChange}
           className="w-full h-10 p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          placeholder="Enter text to parse..."
         />
       </div>
-      {parsedData && <ParsedDisplay parsedData={parsedData} />}
+      
+      {parsedData && <ParsedOutput parsedData={parsedData} />}
+      <SavedOutputs />
     </div>
   );
 };
