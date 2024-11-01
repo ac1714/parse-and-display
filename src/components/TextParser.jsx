@@ -28,7 +28,7 @@ const TextParser = () => {
         <input
           value={input}
           onChange={handleInputChange}
-          className="w-full h-10 p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          className="w-full h-10 p-3 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
         />
       </div>
       {parsedData && <ParsedDisplay parsedData={parsedData} />}
