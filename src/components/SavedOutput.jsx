@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { toast } from "sonner";
 
 const SavedOutput = ({ output, onDelete, onCopy }) => (
   <div className="bg-white rounded-lg shadow-lg mb-4">
@@ -23,7 +24,10 @@ const SavedOutput = ({ output, onDelete, onCopy }) => (
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className="bg-gray-50 p-4 rounded-md cursor-pointer hover:bg-gray-100 transition-colors"
-              onClick={() => navigator.clipboard.writeText(item.value)}
+              onClick={() => {
+                navigator.clipboard.writeText(item.value);
+                toast.success("Copied to clipboard!");
+              }}
             >
               <div className="text-gray-900 font-medium break-all">
                 {item.value}
