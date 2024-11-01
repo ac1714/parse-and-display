@@ -44,22 +44,7 @@ const ParsedDisplay = ({ parsedData }) => {
 
   return (
     <div className="space-y-8">
-      {/* Saved Outputs section - always visible */}
-      <div className="space-y-4">
-        {savedOutputs.length > 0 && (
-          <h2 className="text-lg font-semibold text-gray-900">Saved Outputs</h2>
-        )}
-        {savedOutputs.map((output) => (
-          <SavedOutput
-            key={output.id}
-            output={output}
-            onDelete={() => deleteOutput(output.id)}
-            onCopy={() => copyAllToClipboard(output.data)}
-          />
-        ))}
-      </div>
-
-      {/* Current Output section - only visible when there's parsed data */}
+      {/* Current Output section */}
       {parsedData && (
         <OutputDisplay 
           items={[
@@ -73,6 +58,18 @@ const ParsedDisplay = ({ parsedData }) => {
           onCopyAll={() => copyAllToClipboard()}
         />
       )}
+
+      {/* Saved Outputs section */}
+      <div className="space-y-4">
+        {savedOutputs.map((output) => (
+          <SavedOutput
+            key={output.id}
+            output={output}
+            onDelete={() => deleteOutput(output.id)}
+            onCopy={() => copyAllToClipboard(output.data)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
