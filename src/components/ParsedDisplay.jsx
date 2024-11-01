@@ -13,17 +13,16 @@ const ParsedDisplay = ({ parsedData }) => {
   if (!parsedData) return null;
 
   const items = [
-    { label: "Variable 1", value: parsedData.var1 },
-    { label: "Variable 5", value: parsedData.var5 },
-    { label: "Variable 4", value: parsedData.var4 },
-    { label: "Variable 3", value: parsedData.var3 },
-    { label: "Variable 2", value: parsedData.var2 },
+    { value: parsedData.var1 },
+    { value: parsedData.var5 },
+    { value: parsedData.var4 },
+    { value: parsedData.var3 },
+    { value: parsedData.var2 },
   ];
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 space-y-4">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-gray-800">Parsed Output</h2>
+      <div className="flex justify-end mb-4">
         <Button
           onClick={copyToClipboard}
           className="bg-blue-600 hover:bg-blue-700 text-white"
@@ -34,13 +33,12 @@ const ParsedDisplay = ({ parsedData }) => {
       <div className="space-y-3">
         {items.map((item, index) => (
           <motion.div
-            key={item.label}
+            key={index}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             className="bg-gray-50 p-4 rounded-md"
           >
-            <div className="text-sm text-gray-500 mb-1">{item.label}</div>
             <div className="text-gray-900 font-medium break-all">
               {item.value}
             </div>
