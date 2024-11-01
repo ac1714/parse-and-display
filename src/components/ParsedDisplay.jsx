@@ -42,14 +42,6 @@ const ParsedDisplay = ({ parsedData }) => {
     toast.success("Output deleted!");
   };
 
-  const items = parsedData ? [
-    { value: parsedData.var1 },
-    { value: parsedData.var5 },
-    { value: parsedData.var4 },
-    { value: parsedData.var3 },
-    { value: parsedData.var2 },
-  ] : [];
-
   return (
     <div className="space-y-8">
       <div className="space-y-4">
@@ -68,9 +60,15 @@ const ParsedDisplay = ({ parsedData }) => {
 
       {parsedData && (
         <OutputDisplay 
-          items={items}
+          items={[
+            { value: parsedData.var1 },
+            { value: parsedData.var5 },
+            { value: parsedData.var4 },
+            { value: parsedData.var3 },
+            { value: parsedData.var2 },
+          ]}
           onSave={saveOutput}
-          onCopyAll={copyAllToClipboard}
+          onCopyAll={() => copyAllToClipboard()}
         />
       )}
     </div>
