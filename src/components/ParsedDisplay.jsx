@@ -44,6 +44,7 @@ const ParsedDisplay = ({ parsedData }) => {
 
   return (
     <div className="space-y-8">
+      {/* Saved Outputs section - always visible */}
       <div className="space-y-4">
         {savedOutputs.length > 0 && (
           <h2 className="text-lg font-semibold text-gray-900">Saved Outputs</h2>
@@ -58,6 +59,7 @@ const ParsedDisplay = ({ parsedData }) => {
         ))}
       </div>
 
+      {/* Current Output section - only visible when there's parsed data */}
       {parsedData && (
         <OutputDisplay 
           items={[
