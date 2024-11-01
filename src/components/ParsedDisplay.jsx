@@ -93,43 +93,41 @@ const ParsedDisplay = ({ parsedData }) => {
         </div>
       )}
 
-      {savedOutputs.length > 0 && (
-        <div className="bg-white rounded-lg shadow-lg">
-          <Collapsible defaultOpen>
-            <CollapsibleTrigger className="w-full p-4 text-left font-medium hover:bg-gray-50">
-              Saved Outputs
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              {savedOutputs.map((output) => (
-                <div key={output.id} className="p-6 border-t space-y-4">
-                  {renderOutputItems([
-                    { value: output.data.var1 },
-                    { value: output.data.var5 },
-                    { value: output.data.var4 },
-                    { value: output.data.var3 },
-                    { value: output.data.var2 },
-                  ])}
-                  <div className="pt-4 border-t flex justify-end gap-2">
-                    <Button
-                      onClick={() => deleteOutput(output.id)}
-                      variant="destructive"
-                      className="w-24"
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      onClick={() => copyAllToClipboard(output.data)}
-                      className="bg-green-600 hover:bg-green-700 text-white w-24"
-                    >
-                      Copy
-                    </Button>
-                  </div>
+      <div className="bg-white rounded-lg shadow-lg">
+        <Collapsible defaultOpen>
+          <CollapsibleTrigger className="w-full p-4 text-left font-medium hover:bg-gray-50">
+            {savedOutputs.map(output => `${output.data.var5} | ${output.data.var3}`).join(", ")}
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            {savedOutputs.map((output) => (
+              <div key={output.id} className="p-6 border-t space-y-4">
+                {renderOutputItems([
+                  { value: output.data.var1 },
+                  { value: output.data.var5 },
+                  { value: output.data.var4 },
+                  { value: output.data.var3 },
+                  { value: output.data.var2 },
+                ])}
+                <div className="pt-4 border-t flex justify-end gap-2">
+                  <Button
+                    onClick={() => deleteOutput(output.id)}
+                    variant="destructive"
+                    className="w-24"
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    onClick={() => copyAllToClipboard(output.data)}
+                    className="bg-green-600 hover:bg-green-700 text-white w-24"
+                  >
+                    Copy
+                  </Button>
                 </div>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      )}
+              </div>
+            ))}
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
     </div>
   );
 };
