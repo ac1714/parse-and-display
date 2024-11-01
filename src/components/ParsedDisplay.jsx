@@ -62,41 +62,41 @@ const ParsedDisplay = ({ parsedData }) => {
     </div>
   );
 
-  if (!parsedData) return null;
-
-  const items = [
+  const items = parsedData ? [
     { value: parsedData.var1 },
     { value: parsedData.var5 },
     { value: parsedData.var4 },
     { value: parsedData.var3 },
     { value: parsedData.var2 },
-  ];
+  ] : [];
 
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-lg shadow-lg p-6 space-y-4">
-        {renderOutputItems(items)}
-        <div className="pt-4 border-t flex justify-end gap-2">
-          <Button
-            onClick={saveOutput}
-            variant="outline"
-            className="w-24"
-          >
-            Save
-          </Button>
-          <Button
-            onClick={copyAllToClipboard}
-            className="bg-blue-600 hover:bg-blue-700 text-white w-24"
-          >
-            Copy
-          </Button>
+      {parsedData && (
+        <div className="bg-white rounded-lg shadow-lg p-6 space-y-4">
+          {renderOutputItems(items)}
+          <div className="pt-4 border-t flex justify-end gap-2">
+            <Button
+              onClick={saveOutput}
+              variant="outline"
+              className="w-24 border-2 border-gray-400"
+            >
+              Save
+            </Button>
+            <Button
+              onClick={copyAllToClipboard}
+              className="bg-blue-600 hover:bg-blue-700 text-white w-24"
+            >
+              Copy
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
 
       {savedOutputs.length > 0 && (
         <Collapsible className="bg-white rounded-lg shadow-lg">
           <CollapsibleTrigger className="w-full p-4 text-left font-medium hover:bg-gray-50">
-            {savedOutputs.map(output => `${output.data.var5} | ${output.data.var3}`).join(", ")} ({savedOutputs.length})
+            {savedOutputs.map(output => `${output.data.var5} | ${output.data.var3}`).join(", ")}
           </CollapsibleTrigger>
           <CollapsibleContent>
             {savedOutputs.map((output) => (
