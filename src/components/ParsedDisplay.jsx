@@ -19,8 +19,8 @@ const ParsedDisplay = ({ parsedData }) => {
     });
   };
 
-  const copyAllToClipboard = () => {
-    const text = `${parsedData.var1}\n${parsedData.var5}\n${parsedData.var4}\n${parsedData.var3}\n${parsedData.var2}`;
+  const copyAllToClipboard = (data = parsedData) => {
+    const text = `${data.var1}\n${data.var5}\n${data.var4}\n${data.var3}\n${data.var2}`;
     copyToClipboard(text);
   };
 
@@ -52,15 +52,10 @@ const ParsedDisplay = ({ parsedData }) => {
 
   return (
     <div className="space-y-8">
-      {parsedData && (
-        <OutputDisplay 
-          items={items}
-          onSave={saveOutput}
-          onCopyAll={copyAllToClipboard}
-        />
-      )}
-
       <div className="space-y-4">
+        {savedOutputs.length > 0 && (
+          <h2 className="text-lg font-semibold text-gray-900">Saved Outputs</h2>
+        )}
         {savedOutputs.map((output) => (
           <SavedOutput
             key={output.id}
@@ -70,6 +65,14 @@ const ParsedDisplay = ({ parsedData }) => {
           />
         ))}
       </div>
+
+      {parsedData && (
+        <OutputDisplay 
+          items={items}
+          onSave={saveOutput}
+          onCopyAll={copyAllToClipboard}
+        />
+      )}
     </div>
   );
 };
