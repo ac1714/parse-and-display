@@ -1,6 +1,5 @@
 export const parseText = (text) => {
   try {
-    // First, ensure we have input
     const trimmedText = text.trim();
     if (!trimmedText) {
       throw new Error("Input is empty");
@@ -9,29 +8,36 @@ export const parseText = (text) => {
     // Split by multiple spaces and filter out empty strings
     const parts = trimmedText.split(/\s+/).filter(Boolean);
 
-    // Ensure we have at least 5 parts
+    // Ensure we have exactly 5 parts
     if (parts.length < 5) {
-      throw new Error("Input must contain at least 5 parts separated by spaces or tabs");
+      throw new Error("Input must contain exactly 5 parts");
     }
 
-    // First two parts are single words
+    // First two variables are single words
     const var1 = parts[0];
     const var2 = parts[1];
 
-    // For parts 3-5, we need to handle special cases
-    // We know the fourth part is a single word (jdkfs8f-jksdfjs0-sdjf)
-    // So we can use it as a delimiter to split the remaining content correctly
-    const remainingText = parts.slice(2).join(" ");
-    const fourthVarIndex = remainingText.lastIndexOf(parts[parts.length - 2]);
-    const beforeFourthVar = remainingText.substring(0, fourthVarIndex).trim();
-    const afterFourthVar = remainingText.substring(fourthVarIndex + parts[parts.length - 2].length).trim();
+    // Find the index of var4 (the unique identifier pattern)
+    const var4Index = parts.findIndex(part => /^[\w-]+$/.test(part) && part.includes('-'));
+    if (var4Index === -1) {
+      throw new Error("Could not find the identifier pattern (var4)");
+    }
+
+    // Extract var3 (everything between var2 and var4)
+    const var3 = parts.slice(2, var4Index).join(" ");
+    
+    // var4 is the identifier
+    const var4 = parts[var4Index];
+    
+    // var5 is everything after var4
+    const var5 = parts.slice(var4Index + 1).join(" ");
 
     return {
       var1,
       var2,
-      var3: beforeFourthVar,
-      var4: parts[parts.length - 2],
-      var5: afterFourthVar,
+      var3,
+      var4,
+      var5,
     };
   } catch (error) {
     throw new Error("Failed to parse input. Please ensure the format is correct.");
