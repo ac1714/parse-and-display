@@ -95,9 +95,9 @@ const ParsedDisplay = ({ parsedData }) => {
 
       {savedOutputs.length > 0 && (
         <div className="bg-white rounded-lg shadow-lg">
-          <Collapsible>
+          <Collapsible defaultOpen>
             <CollapsibleTrigger className="w-full p-4 text-left font-medium hover:bg-gray-50">
-              {savedOutputs.map(output => `${output.data.var5} | ${output.data.var3}`).join(", ")}
+              Saved Outputs
             </CollapsibleTrigger>
             <CollapsibleContent>
               {savedOutputs.map((output) => (
