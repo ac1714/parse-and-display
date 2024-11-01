@@ -6,8 +6,8 @@ export const parseText = (text) => {
       throw new Error("Input is empty");
     }
 
-    // Match exactly 5 parts, allowing spaces in the last part
-    const matches = trimmedText.match(/^(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(.+)$/);
+    // Match exactly 5 parts, allowing multiple spaces between parts and spaces within parts
+    const matches = trimmedText.match(/^(\S+)\s+(\S+)\s+([^\s](?:.*?[^\s])?)\s+(\S+)\s+(.+?)$/);
     
     if (!matches) {
       throw new Error("Input must contain exactly 5 parts separated by spaces or tabs");
