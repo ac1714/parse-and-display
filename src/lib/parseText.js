@@ -6,20 +6,32 @@ export const parseText = (text) => {
       throw new Error("Input is empty");
     }
 
-    // Match exactly 5 parts, allowing multiple spaces between parts and spaces within parts
-    const matches = trimmedText.match(/^(\S+)\s+(\S+)\s+([^\s](?:.*?[^\s])?)\s+(\S+)\s+(.+?)$/);
-    
-    if (!matches) {
-      throw new Error("Input must contain exactly 5 parts separated by spaces or tabs");
+    // Split by multiple spaces and filter out empty strings
+    const parts = trimmedText.split(/\s+/).filter(Boolean);
+
+    // Ensure we have at least 5 parts
+    if (parts.length < 5) {
+      throw new Error("Input must contain at least 5 parts separated by spaces or tabs");
     }
 
-    // matches[0] is the full string, so we start from index 1
+    // First two parts are single words
+    const var1 = parts[0];
+    const var2 = parts[1];
+
+    // For parts 3-5, we need to handle special cases
+    // We know the fourth part is a single word (jdkfs8f-jksdfjs0-sdjf)
+    // So we can use it as a delimiter to split the remaining content correctly
+    const remainingText = parts.slice(2).join(" ");
+    const fourthVarIndex = remainingText.lastIndexOf(parts[parts.length - 2]);
+    const beforeFourthVar = remainingText.substring(0, fourthVarIndex).trim();
+    const afterFourthVar = remainingText.substring(fourthVarIndex + parts[parts.length - 2].length).trim();
+
     return {
-      var1: matches[1],
-      var2: matches[2],
-      var3: matches[3],
-      var4: matches[4],
-      var5: matches[5].trim(),
+      var1,
+      var2,
+      var3: beforeFourthVar,
+      var4: parts[parts.length - 2],
+      var5: afterFourthVar,
     };
   } catch (error) {
     throw new Error("Failed to parse input. Please ensure the format is correct.");
