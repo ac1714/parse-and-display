@@ -59,8 +59,8 @@ const ParsedDisplay = ({ parsedData }) => {
         />
       )}
 
-      {/* Saved Outputs section */}
-      <div className="space-y-4">
+      {/* Saved Outputs section - always visible */}
+      <div className="space-y-4 min-h-[50px]">
         {savedOutputs.map((output) => (
           <SavedOutput
             key={output.id}
